@@ -12,8 +12,7 @@
                 "content-script.js"
             ],
             "matches": [
-                "http://tickets.corporativoes.com/login",
-                "http://tickets.corporativoes.com/home"
+                "http://tickets.corporativoes.com/*"
             ],
             "all_frames": true,
             "run_at": "document_idle",
@@ -24,5 +23,4 @@
         "default_title": "Autologin",
         "default_popup": "popup/popup.html"
     }
-
 }
