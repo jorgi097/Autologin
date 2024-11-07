@@ -40,4 +40,13 @@ window.onload = () => {
             console.log(error);
         }
     }, 50);
+
+    try {
+        let dark = document.querySelector("#main > div > ion-header > ion-toolbar > ion-chip > ion-toggle")
+        dark.setAttribute("checked", true);
+    } catch (error) {
+        
+    }
+
+
 };
