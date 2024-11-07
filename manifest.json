@@ -2,9 +2,12 @@
     "manifest_version": 3,
     "name": "Auto-Login",
     "version": "1.0",
-    "description": "Entrar automaticamente a mi cuenta al abrir tickets.",
+    "description": "Entrar automáticamente a mi cuenta al abrir tickets.",
     "permissions": [
-        "scripting"
+        "scripting",
+        "tabs",
+        "activeTab",
+        "storage"
     ],
     "content_scripts": [
         {
@@ -18,6 +21,9 @@
             "run_at": "document_idle",
             "world": "MAIN"
         }
+    ],
+    "host_permissions": [
+        "http://tickets.corporativoes.com/*"
     ],
     "action": {
         "default_title": "Autologin",
