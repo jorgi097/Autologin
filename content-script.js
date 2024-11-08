@@ -12,6 +12,26 @@ window.onload = () => {
         "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(1) > ion-card-content > ion-button"
     );
 
+
+    let back = null;
+
+    setInterval(() => {
+        try {
+            back = document.querySelector("#root > ion-app > ion-router-outlet > div");
+
+            back.removeAttribute("style");
+        } catch (error) {
+            console.log(error);
+        }
+    }, 50);
+
+    try {
+        let dark = document.querySelector("#main > div > ion-header > ion-toolbar > ion-chip > ion-toggle")
+        dark.setAttribute("checked", true);
+    } catch (error) {
+        
+    }
+
     // Si los elementos existen, asigna los valores y haz clic en el botón de login
     if (username && password && loginButton) {
         username.value = "jgarcia";
