@@ -1,72 +1,95 @@
-window.onload = () => {
-    // Selección de los elementos de login
-    let username = document.querySelector(
-        "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(1) > ion-card-content > ion-list > ion-item:nth-child(1) > ion-input"
-    );
+(function () {
+    let username, password, loginButton, tutorial, back, dark;
 
-    let password = document.querySelector(
-        "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(1) > ion-card-content > ion-list > ion-item:nth-child(2) > ion-input"
-    );
+    const intervalTimeout = 200;
 
-    let loginButton = document.querySelector(
-        "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(1) > ion-card-content > ion-button"
-    );
-
-
-    let back = null;
-
-    setInterval(() => {
+    const toggleDarkMode = setInterval(() => {
+        //Dark Theme
         try {
-            back = document.querySelector("#root > ion-app > ion-router-outlet > div");
-
-            back.removeAttribute("style");
+            let dark = document.querySelector(
+                "#main > div > ion-header > ion-toolbar > ion-chip > ion-toggle"
+            );
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
-    }, 50);
-
-    try {
-        let dark = document.querySelector("#main > div > ion-header > ion-toolbar > ion-chip > ion-toggle")
-        dark.setAttribute("checked", true);
-    } catch (error) {
-        
-    }
-
-    // Si los elementos existen, asigna los valores y haz clic en el botón de login
-    if (username && password && loginButton) {
-        username.value = "jgarcia";
-        password.value = "Lacosa05.";
-
-        username.dispatchEvent(new Event("input", { bubbles: true }));
-        password.dispatchEvent(new Event("input", { bubbles: true }));
-
-        function login() {
-            loginButton.dispatchEvent(new Event("click", { bubbles: true }));
+        if (!!dark) {
+            dark.setAttribute("checked", true);
+            clearInterval(toggleDarkMode);
         }
+    }, intervalTimeout);
 
-        setTimeout(login, 100);
-    }
-
-    let tutorial = null;
-
-    setInterval(() => {
+    const removeBAckground = setInterval(() => {
+        //Elimina Fondo
         try {
+            back = document.querySelector(
+                "#root > ion-app > ion-router-outlet > div"
+            );
+        } catch (error) {
+            console.error(error);
+        }
+        if (!!back) {
+            back.removeAttribute("style");
+            clearInterval(removeBAckground);
+        }
+    }, intervalTimeout);
+
+    const login = setInterval(() => {
+        //Inicia Sesion
+        if (!username || !password || !loginButton) {
+            try {
+                username = document.querySelector(
+                    "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(1) > ion-card-content > ion-list > ion-item:nth-child(1) > ion-input"
+                );
+
+                password = document.querySelector(
+                    "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(1) > ion-card-content > ion-list > ion-item:nth-child(2) > ion-input"
+                );
+
+                loginButton = document.querySelector(
+                    "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(1) > ion-card-content > ion-button"
+                );
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        if (!!username && !!password && !!loginButton) {
+            username.value = "jgarcia";
+            password.value = "Lacosa05.";
+
+            username.dispatchEvent(new Event("input", { bubbles: true }));
+            password.dispatchEvent(new Event("input", { bubbles: true }));
+
+            if (username.value === "jgarcia" && password === "Lacosa05.") {
+                loginButton.dispatchEvent(
+                    new Event("click", {bubbles: true})
+                );
+                clearInterval(login);
+            }
+        }
+    }, intervalTimeout);
+
+    const removeTutorial = setInterval(() => {
+        //Elimina Tutorial
+
+        if (!tutorial) {
+            try {
+                tutorial = document.querySelector(
+                    "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(2)"
+                );
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        if (!!tutorial) {
             tutorial = document.querySelector(
                 "#main > div > ion-content > ion-grid > ion-row > ion-col > ion-card:nth-child(2)"
             );
-
             tutorial.setAttribute("style", "display: none;");
-        } catch (error) {
-            console.log(error);
+            if (tutorial.classList.contains("display: none"))
+                console.log(tutorial.classList + "yes");
+            // clearInterval(removeTutorial);
         }
-    }, 50);
-
-    try {
-        let dark = document.querySelector("#main > div > ion-header > ion-toolbar > ion-chip > ion-toggle")
-        dark.setAttribute("checked", true);
-    } catch (error) {
-        
-    }
-
-
-};
+    }, intervalTimeout);
+})();
